@@ -4,10 +4,20 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     concat: {
       options: {
+        separator: '\n\n'
       },
-      dist: {
-        src: ['public/client/**/*.js','public/lib/**/*.js'],
-        dest: 'public/dist/benley.js'
+      basic: {
+        src: [
+          'public/lib/underscore.js',
+          'public/lib/jquery.js',
+          'public/lib/handlebars.js',
+          'public/lib/backbone.js',
+        ],
+        dest: 'public/dist/benley.lib.js'
+      },
+      extras: {
+        src: ['public/client/**/*.js'],
+        dest: 'public/dist/benley.client.js'
       }
     },
 
@@ -27,9 +37,13 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      options: {
+        mangle: false
+      },
       my_target: {
         files: {
-          'public/dist/benley.min.js': ['public/dist/benley.js']
+          'public/dist/benley.lib.min.js': ['public/dist/benley.lib.js'],
+          'public/dist/benley.client.min.js': ['public/dist/benley.client.js']
         }
       }
     },

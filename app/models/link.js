@@ -1,6 +1,21 @@
 var db = require('../config');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 var crypto = require('crypto');
 
+var URL = new Schema({
+  url: String,
+  base_url: String,
+  code: String,
+  title: String,
+  visits: {type: Number, default: 0},
+  timeStamp: {type: Date, default: Date.now}
+});
+
+var urls = mongoose.model('urls', URL);
+exports.urls = urls;
+
+/*
 var Link = db.Model.extend({
   tableName: 'urls',
   hasTimestamps: true,
@@ -17,3 +32,4 @@ var Link = db.Model.extend({
 });
 
 module.exports = Link;
+*/
